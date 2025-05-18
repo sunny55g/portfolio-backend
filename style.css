@@ -832,10 +832,10 @@ footer {
     font-size: 1rem;
   }
   
-  .hero-image img {
+/*   .hero-image img {
     width: 200px;
     height: 200px;
-  }
+  } */
   
   .cta-buttons {
     flex-direction: column;
