@@ -1,3 +1,4 @@
+require("dotenv").config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -8,12 +9,13 @@ const app = express();
 const port = process.env.PORT || 3010;
 
 // Middleware
+app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('./'));  // Serve static files from the current directory
 
 // MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/students', {
+mongoose.connect('mongodb+srv://harshsuthar5656:sunny_55g@newapi.rxlryp4.mongodb.net/', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -54,8 +56,31 @@ app.post('/post', async (req, res) => {
     res.status(500).json({ message: 'Failed to send message.' });
   }
 });
+app.post("/api/contact", async (req, res) => {
+  const { name, email, message } = req.body;
+  console.log("Received:", req.body);
+   try {
+    await Contact.create({ name, email, message });
+    res.status(201).json({ success: true });
+  } catch (err) {
+    console.error("Error saving contact:", err);
+    res.status(500).json({ success: false, error: "Database error" });
+  }
+});
 
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+
+
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log("✅ MongoDB Connected"))
+.catch(err => console.error("❌ MongoDB Error:", err));
+
+
+
