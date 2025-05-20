@@ -37,9 +37,9 @@ const contactSchema = new mongoose.Schema({
 const Contact = mongoose.model('datas', contactSchema);
 
 // Serve the HTML file
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
+// app.get('/', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'index.html'));
+// });
 
 // Handle form submissions
 app.post('/post', async (req, res) => {
