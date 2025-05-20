@@ -19,8 +19,7 @@ app.use(express.static('./'));  // Serve static files from the current directory
 
 // MongoDB Connection
 mongoose.connect('mongodb+srv://harshsuthar5656:sunny_55g@newapi.rxlryp4.mongodb.net/contactFormDB?retryWrites=true&w=majority', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+
 })
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('MongoDB connection error:', err));
