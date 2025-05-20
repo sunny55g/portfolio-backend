@@ -41,24 +41,24 @@ const Contact = mongoose.model('datas', contactSchema);
 // });
 
 // Handle form submissions
-app.post('/api/contact', async (req, res) => {
-  const { name, email, message } = req.body;
+// app.post('/api/contact', async (req, res) => {
+//   const { name, email, message } = req.body;
 
-  const newContact = new Contact({
-    name,
-    email,
-    message
-  });
+//   const newContact = new Contact({
+//     name,
+//     email,
+//     message
+//   });
 
-  try {
-    await newContact.save();
-    console.log('Contact saved to database');
-    res.status(200).json({ message: 'Message sent successfully!' });
-  } catch (error) {
-    console.error('Error saving contact:', error);
-    res.status(500).json({ message: 'Failed to send message.' });
-  }
-});
+//   try {
+//     await newContact.save();
+//     console.log('Contact saved to database');
+//     res.status(200).json({ message: 'Message sent successfully!' });
+//   } catch (error) {
+//     console.error('Error saving contact:', error);
+//     res.status(500).json({ message: 'Failed to send message.' });
+//   }
+// });
 app.post("/api/contact", async (req, res) => {
   const { name, email, message } = req.body;
   console.log("Received:", req.body);
