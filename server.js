@@ -41,7 +41,7 @@ const Contact = mongoose.model('datas', contactSchema);
 // });
 
 // Handle form submissions
-app.post('/post', async (req, res) => {
+app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body;
 
   const newContact = new Contact({
