@@ -5,12 +5,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
-
+const dotenv = require('dotenv');
 const app = express();
 const port = process.env.PORT || 3010;
-
+dotenv.config();
 // Middleware
-app.use(cors({ origin: "*" })); // Allow all origins
+app.use(cors({
+  origin: 'https://harsh-suthar-portfolio.netlify.app/',
+  methods: ['GET', 'POST'],
+})); // Allow all origins
 
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -71,11 +74,19 @@ app.post("/api/contact", async (req, res) => {
 });
 
 // Start the server
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// app.listen(port, () => {
+//   console.log(`Server is running on port ${port}`);
+// });
 
-
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(port, () => {
+      console.log(`Server running on port ${port}`);
+    });
+  })
+    .catch((err) => {
+    console.error('MongoDB connection failed:', err);
+  });
 
 // mongoose.connect(process.env.MONGO_URI, {
 //   useNewUrlParser: true,
