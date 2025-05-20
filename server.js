@@ -1,5 +1,6 @@
 require("dotenv").config();
 
+const cors = require('cors');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -9,18 +10,17 @@ const app = express();
 const port = process.env.PORT || 3010;
 
 // Middleware
+app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static('./'));  // Serve static files from the current directory
 
 // MongoDB Connection
-mongoose.connect('mongodb+srv://harshsuthar5656:sunny_55g@newapi.rxlryp4.mongodb.net/contactFormDB?retryWrites=true&w=majority',
-//                  {
-//    useNewUrlParser: true,
-//    useUnifiedTopology: true,
-// }
-                )
+mongoose.connect('mongodb+srv://harshsuthar5656:sunny_55g@newapi.rxlryp4.mongodb.net/contactFormDB?retryWrites=true&w=majority', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
 .then(() => console.log('Connected to MongoDB'))
 .catch(err => console.error('MongoDB connection error:', err));
 
